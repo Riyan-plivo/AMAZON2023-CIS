@@ -2,6 +2,57 @@
 
 # Preliminary tasks that should always be run
 # List users in order to look files inside each home directory
+---
+# Preliminary tasks for Amazon Linux 2023
+
+# Install Python 3 and ensure dnf module is used
+- name: "PRELIM | Install Python 3 and essential packages"
+  ansible.builtin.dnf:
+    name: 
+      - python3
+      - python3-pip
+      - python3-dnf
+      - git
+      - vim
+    state: present
+  become: yes
+
+# Ensure python3-libselinux is installed for compatibility
+- name: "PRELIM | Ensure python3-libselinux is installed"
+  ansible.builtin.dnf:
+    name: python3-libselinux
+    state: present
+  become: yes
+  when:
+    - '"python3-libselinux" not in ansible_facts.packages'
+
+# Set the Python interpreter to Python 3
+- name: "PRELIM | Set Python 3 as the interpreter"
+  ansible.builtin.set_fact:
+    ansible_python_interpreter: /usr/bin/python3
+  tags:
+    - always
+
+# Python script execution using Python 3
+- name: "PRELIM | Gather facts of all mounts using Python 3"
+  script: facts/all_mounts.py
+  args:
+    executable: python3
+  changed_when: false
+  check_mode: false
+  register: all_mounts
+
+# Section to gather interactive users (audit-related tasks)
+- name: "PRELIM | AUDIT | Interactive Users"
+  tags:
+    - always
+  ansible.builtin.shell: >
+    grep -E -v '^(root|halt|sync|shutdown)' /etc/passwd | awk -F: '(!index($7, "sbin/nologin") && $7 != "/bin/nologin" && $7 != "/bin/false") { print $1 }'
+  changed_when: false
+  register: discovered_interactive_usernames
+
+# Continue with other tasks in the preliminary section
+# (e.g., gathering UIDs, configuring SSH, cron, etc.)
 
 - name: Include audit specific variables
   when:
