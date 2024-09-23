@@ -1,17 +1,17 @@
-# ---
+---
 
-# - name: "1.6.1.1 | PATCH | Ensure SELinux is installed"
-#   ansible.builtin.package:
-#       name: libselinux
-#       state: present
-#   when:
-#       - amzn2023cis_rule_1_6_1_1
-#   tags:
-#       - level1-server
-#       - patch
-#       - rule_1.6.1.1
-#       - nist_sp800-53r5_AC-3
-#       - nist_sp800-53r5_MP-2
+- name: "1.6.1.1 | PATCH | Ensure SELinux is installed"
+  ansible.builtin.package:
+      name: libselinux
+      state: present
+  when:
+      - amzn2023cis_rule_1_6_1_1
+  tags:
+      - level1-server
+      - patch
+      - rule_1.6.1.1
+      - nist_sp800-53r5_AC-3
+      - nist_sp800-53r5_MP-2
 
 - name: "1.6.1.2 | PATCH | Ensure SELinux is not disabled in bootloader configuration"
   ansible.builtin.replace:
