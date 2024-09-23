@@ -16,22 +16,22 @@
       - rule_1.7.1
       - nist_sp800-53r5_CM-3
 
-# - name: "1.7.2 | PATCH | Ensure local login warning banner is configured properly"
-#   ansible.builtin.template:
-#       src: etc/issue.j2
-#       dest: /etc/issue
-#       owner: root
-#       group: root
-#       mode: '0644'
-#   when:
-#       - amzn2023cis_rule_1_7_2
-#   tags:
-#       - level1-server
-#       - patch
-#       - rule_1.7.2
-#       - nist_sp800-53r5_CM-1
-#       - nist_sp800-53r5_CM-3
-#       - nist_sp800-53r5_CM-6
+- name: "1.7.2 | PATCH | Ensure local login warning banner is configured properly"
+  ansible.builtin.template:
+      src: etc/issue.j2
+      dest: /etc/issue
+      owner: root
+      group: root
+      mode: '0644'
+  when:
+      - amzn2023cis_rule_1_7_2
+  tags:
+      - level1-server
+      - patch
+      - rule_1.7.2
+      - nist_sp800-53r5_CM-1
+      - nist_sp800-53r5_CM-3
+      - nist_sp800-53r5_CM-6
 
 # - name: "1.7.3 | PATCH | Ensure remote login warning banner is configured properly"
 #   ansible.builtin.template:
