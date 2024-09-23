@@ -51,22 +51,22 @@
 #       - nist_sp800-53r5_MP-2
 #       - nist_sp800-53r5_SI-5
 
-- name: "5.1.1.4 | PATCH | Ensure rsyslog default file permissions configured"
-  ansible.builtin.lineinfile:
-      path: /etc/rsyslog.conf
-      regexp: '^\$FileCreateMode'
-      line: '$FileCreateMode 0640'
-  notify: Restart rsyslog
-  when:
-      - amzn2023cis_rule_5_1_1_4
-  tags:
-      - level1-server
-      - patch
-      - rsyslog
-      - rule_5.1.1.4
-      - nist_sp800-53r5_AC-3
-      - nist_sp800-53r5_AC-6
-      - nist_sp800-53r5_MP-2
+# - name: "5.1.1.4 | PATCH | Ensure rsyslog default file permissions configured"
+#   ansible.builtin.lineinfile:
+#       path: /etc/rsyslog.conf
+#       regexp: '^\$FileCreateMode'
+#       line: '$FileCreateMode 0640'
+#   notify: Restart rsyslog
+#   when:
+#       - amzn2023cis_rule_5_1_1_4
+#   tags:
+#       - level1-server
+#       - patch
+#       - rsyslog
+#       - rule_5.1.1.4
+#       - nist_sp800-53r5_AC-3
+#       - nist_sp800-53r5_AC-6
+#       - nist_sp800-53r5_MP-2
 
 # - name: "5.1.1.5 | PATCH | Ensure logging is configured"
 #   block:
