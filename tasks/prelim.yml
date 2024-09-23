@@ -156,18 +156,18 @@
 #   tags:
 #       - always
 
-- name: "PRELIM | Section 4.1 | Configure cron"
-  ansible.builtin.package:
-      name: cronie
-      state: present
-  become: true
-  when:
-      - amzn2023cis_rule_4_1_1
-      - '"cronie" not in ansible_facts.packages'
-  tags:
-      - level1-server
-      - rule_4.1.1
-      - cron
+# - name: "PRELIM | Section 4.1 | Configure cron"
+#   ansible.builtin.package:
+#       name: cronie
+#       state: present
+#   become: true
+#   when:
+#       - amzn2023cis_rule_4_1_1
+#       - '"cronie" not in ansible_facts.packages'
+#   tags:
+#       - level1-server
+#       - rule_4.1.1
+#       - cron
 
 # Added to ensure ssh drop in file exists if not default /etc/ssh/sshd_config
 - name: "PRELIM | Section 4.2 | SSH"
