@@ -225,13 +225,13 @@ amzn2023cis_rule_1_7_3: true
 amzn2023cis_rule_1_7_4: true
 amzn2023cis_rule_1_7_5: true
 amzn2023cis_rule_1_7_6: true
-amzn2023cis_rule_1_8: true
-amzn2023cis_rule_1_9: true
+amzn2023cis_rule_1_8: false
+amzn2023cis_rule_1_9: false
 
 ## Section 2 rules
 # Section 2 is Services (Special Purpose Services, and service clients)
 # Configure Time Synchronization (chrony)
-amzn2023cis_rule_2_1_1: true
+amzn2023cis_rule_2_1_1: false
 amzn2023cis_rule_2_1_2: true
 # Configure Special Purpose Services
 amzn2023cis_rule_2_2_1: true
