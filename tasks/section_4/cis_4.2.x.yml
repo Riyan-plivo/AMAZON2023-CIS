@@ -143,27 +143,27 @@
       - nist_sp800-53r5_AU-12
       - nist_sp800-53r5_SI-5
 
-# - name: "4.2.6 | PATCH | Ensure SSH PAM is enabled"
-#   ansible.builtin.lineinfile:
-#       path: "{{ item.path }}"
-#       regexp: "^#UsePAM|^UsePAM"
-#       line: 'UsePAM yes'
-#       validate: sshd -t -f %s
-#   with_items:
-#       - "{{ sshd_d_conf_files.files }}"
-#       - "{{ main_sshd_cfg.stat }}"
-#   when:
-#       - amzn2023cis_rule_4_2_6
-#   tags:
-#       - level1-server
-#       - patch
-#       - ssh
-#       - rule_4.2.6
-#       - nist_sp800-53r5_CM-1
-#       - nist_sp800-53r5_CM-2
-#       - nist_sp800-53r5_CM-6
-#       - nist_sp800-53r5_CM-7
-#       - nist_sp800-53r5_IA-5
+- name: "4.2.6 | PATCH | Ensure SSH PAM is enabled"
+  ansible.builtin.lineinfile:
+      path: "{{ item.path }}"
+      regexp: "^#UsePAM|^UsePAM"
+      line: 'UsePAM yes'
+      validate: sshd -t -f %s
+  with_items:
+      - "{{ sshd_d_conf_files.files }}"
+      - "{{ main_sshd_cfg.stat }}"
+  when:
+      - amzn2023cis_rule_4_2_6
+  tags:
+      - level1-server
+      - patch
+      - ssh
+      - rule_4.2.6
+      - nist_sp800-53r5_CM-1
+      - nist_sp800-53r5_CM-2
+      - nist_sp800-53r5_CM-6
+      - nist_sp800-53r5_CM-7
+      - nist_sp800-53r5_IA-5
 
 - name: "4.2.7 | PATCH | Ensure SSH root login is disabled"
   ansible.builtin.lineinfile:
@@ -268,148 +268,148 @@
       - nist_sp800-53r5_CM-7
       - nist_sp800-53r5_IA-5
 
-# - name: "4.2.12 | PATCH | Ensure SSH X11 forwarding is disabled"
-#   ansible.builtin.lineinfile:
-#       path: "{{ item.path }}"
-#       regexp: "^#X11Forwarding|^X11Forwarding"
-#       line: 'X11Forwarding no'
-#       validate: sshd -t -f %s
-#   with_items:
-#       - "{{ sshd_d_conf_files.files }}"
-#       - "{{ main_sshd_cfg.stat }}"
-#   when:
-#       - amzn2023cis_rule_4_2_12
-#   tags:
-#       - level2-server
-#       - patch
-#       - ssh
-#       - rule_4.2.12
-#       - nist_sp800-53r5_CM-7
+- name: "4.2.12 | PATCH | Ensure SSH X11 forwarding is disabled"
+  ansible.builtin.lineinfile:
+      path: "{{ item.path }}"
+      regexp: "^#X11Forwarding|^X11Forwarding"
+      line: 'X11Forwarding no'
+      validate: sshd -t -f %s
+  with_items:
+      - "{{ sshd_d_conf_files.files }}"
+      - "{{ main_sshd_cfg.stat }}"
+  when:
+      - amzn2023cis_rule_4_2_12
+  tags:
+      - level2-server
+      - patch
+      - ssh
+      - rule_4.2.12
+      - nist_sp800-53r5_CM-7
 
-# - name: "4.2.13 | PATCH | Ensure SSH AllowTcpForwarding is disabled"
-#   ansible.builtin.lineinfile:
-#       path: "{{ item.path }}"
-#       regexp: "^#AllowTcpForwarding|^AllowTcpForwarding"
-#       line: 'AllowTcpForwarding no'
-#       validate: sshd -t -f %s
-#   with_items:
-#       - "{{ sshd_d_conf_files.files }}"
-#       - "{{ main_sshd_cfg.stat }}"
-#   when:
-#       - amzn2023cis_rule_4_2_13
-#   tags:
-#       - level2-server
-#       - patch
-#       - ssh
-#       - rule_4.2.13
-#       - nist_sp800-53r5_CM-1
-#       - nist_sp800-53r5_CM-2
-#       - nist_sp800-53r5_CM-6
-#       - nist_sp800-53r5_CM-7
-#       - nist_sp800-53r5_IA-5
+- name: "4.2.13 | PATCH | Ensure SSH AllowTcpForwarding is disabled"
+  ansible.builtin.lineinfile:
+      path: "{{ item.path }}"
+      regexp: "^#AllowTcpForwarding|^AllowTcpForwarding"
+      line: 'AllowTcpForwarding no'
+      validate: sshd -t -f %s
+  with_items:
+      - "{{ sshd_d_conf_files.files }}"
+      - "{{ main_sshd_cfg.stat }}"
+  when:
+      - amzn2023cis_rule_4_2_13
+  tags:
+      - level2-server
+      - patch
+      - ssh
+      - rule_4.2.13
+      - nist_sp800-53r5_CM-1
+      - nist_sp800-53r5_CM-2
+      - nist_sp800-53r5_CM-6
+      - nist_sp800-53r5_CM-7
+      - nist_sp800-53r5_IA-5
 
-# - name: "4.2.14 | PATCH | Ensure system-wide crypto policy is not over-ridden"
-#   block:
-#       - name: "4.2.14 | AUDIT | Ensure system-wide crypto policy is not over-ridden"
-#         ansible.builtin.shell: grep -i '^\s*CRYPTO_POLICY=' /etc/sysconfig/sshd
-#         changed_when: false
-#         failed_when: ( ssh_crypto_discovery.rc not in [ 0, 1 ] )
-#         register: ssh_crypto_discovery
+- name: "4.2.14 | PATCH | Ensure system-wide crypto policy is not over-ridden"
+  block:
+      - name: "4.2.14 | AUDIT | Ensure system-wide crypto policy is not over-ridden"
+        ansible.builtin.shell: grep -i '^\s*CRYPTO_POLICY=' /etc/sysconfig/sshd
+        changed_when: false
+        failed_when: ( ssh_crypto_discovery.rc not in [ 0, 1 ] )
+        register: ssh_crypto_discovery
 
-#       - name: "4.2.14 | PATCH | Ensure system-wide crypto policy is not over-ridden"
-#         ansible.builtin.shell: sed -ri "s/^\s*(CRYPTO_POLICY\s*=.*)$/# \1/" /etc/sysconfig/sshd
-#         notify: Restart sshd
-#         when: ssh_crypto_discovery.stdout | length > 0
-#   when:
-#       - amzn2023cis_rule_4_2_14
-#   tags:
-#       - level1-server
-#       - patch
-#       - ssh
-#       - rule_4.2.14
-#       - nist_sp800-53r5_SC-8
-#       - nist_sp800-53r5_AC-17
-#       - nist_sp800-53r5_IA-5
+      - name: "4.2.14 | PATCH | Ensure system-wide crypto policy is not over-ridden"
+        ansible.builtin.shell: sed -ri "s/^\s*(CRYPTO_POLICY\s*=.*)$/# \1/" /etc/sysconfig/sshd
+        notify: Restart sshd
+        when: ssh_crypto_discovery.stdout | length > 0
+  when:
+      - amzn2023cis_rule_4_2_14
+  tags:
+      - level1-server
+      - patch
+      - ssh
+      - rule_4.2.14
+      - nist_sp800-53r5_SC-8
+      - nist_sp800-53r5_AC-17
+      - nist_sp800-53r5_IA-5
 
-# - name: "4.2.15 | PATCH | Ensure SSH warning banner is configured"
-#   ansible.builtin.lineinfile:
-#       path: "{{ amzn2023cis_sshd_config_file }}"
-#       regexp: '^Banner'
-#       line: 'Banner /etc/issue.net'
-#   when:
-#       - amzn2023cis_rule_4_2_15
-#   tags:
-#       - level1-server
-#       - patch
-#       - ssh
-#       - rule_4.2.15
-#       - nist_sp800-53r5_CM-1
-#       - nist_sp800-53r5_CM-2
-#       - nist_sp800-53r5_CM-6
-#       - nist_sp800-53r5_CM-7
-#       - nist_sp800-53r5_IA-5
+- name: "4.2.15 | PATCH | Ensure SSH warning banner is configured"
+  ansible.builtin.lineinfile:
+      path: "{{ amzn2023cis_sshd_config_file }}"
+      regexp: '^Banner'
+      line: 'Banner /etc/issue.net'
+  when:
+      - amzn2023cis_rule_4_2_15
+  tags:
+      - level1-server
+      - patch
+      - ssh
+      - rule_4.2.15
+      - nist_sp800-53r5_CM-1
+      - nist_sp800-53r5_CM-2
+      - nist_sp800-53r5_CM-6
+      - nist_sp800-53r5_CM-7
+      - nist_sp800-53r5_IA-5
 
-# - name: "4.2.16 | PATCH | Ensure SSH MaxAuthTries is set to 4 or less"
-#   ansible.builtin.lineinfile:
-#       path: "{{ item.path }}"
-#       regexp: '^(#)?MaxAuthTries \d'
-#       line: 'MaxAuthTries {{ amzn2023cis_ssh_maxauthtries }}'
-#       validate: sshd -t -f %s
-#   with_items:
-#       - "{{ sshd_d_conf_files.files }}"
-#       - "{{ main_sshd_cfg.stat }}"
-#   when:
-#       - amzn2023cis_rule_4_2_16
-#   tags:
-#       - level1-server
-#       - patch
-#       - ssh
-#       - rule_4.2.16
-#       - nist_sp800-53r5_AU-3
+- name: "4.2.16 | PATCH | Ensure SSH MaxAuthTries is set to 4 or less"
+  ansible.builtin.lineinfile:
+      path: "{{ item.path }}"
+      regexp: '^(#)?MaxAuthTries \d'
+      line: 'MaxAuthTries {{ amzn2023cis_ssh_maxauthtries }}'
+      validate: sshd -t -f %s
+  with_items:
+      - "{{ sshd_d_conf_files.files }}"
+      - "{{ main_sshd_cfg.stat }}"
+  when:
+      - amzn2023cis_rule_4_2_16
+  tags:
+      - level1-server
+      - patch
+      - ssh
+      - rule_4.2.16
+      - nist_sp800-53r5_AU-3
 
-# - name: "4.2.17 | PATCH | Ensure SSH MaxStartups is configured"
-#   ansible.builtin.lineinfile:
-#       path: "{{ item.path }}"
-#       regexp: "^#MaxStartups|^MaxStartups"
-#       line: 'MaxStartups 10:30:60'
-#       validate: sshd -t -f %s
-#   with_items:
-#       - "{{ sshd_d_conf_files.files }}"
-#       - "{{ main_sshd_cfg.stat }}"
-#   when:
-#       - amzn2023cis_rule_4_2_17
-#   tags:
-#       - level1-server
-#       - patch
-#       - ssh
-#       - rule_4.2.17
-#       - nist_sp800-53r5_CM-1
-#       - nist_sp800-53r5_CM-2
-#       - nist_sp800-53r5_CM-6
-#       - nist_sp800-53r5_CM-7
-#       - nist_sp800-53r5_IA-5
+- name: "4.2.17 | PATCH | Ensure SSH MaxStartups is configured"
+  ansible.builtin.lineinfile:
+      path: "{{ item.path }}"
+      regexp: "^#MaxStartups|^MaxStartups"
+      line: 'MaxStartups 10:30:60'
+      validate: sshd -t -f %s
+  with_items:
+      - "{{ sshd_d_conf_files.files }}"
+      - "{{ main_sshd_cfg.stat }}"
+  when:
+      - amzn2023cis_rule_4_2_17
+  tags:
+      - level1-server
+      - patch
+      - ssh
+      - rule_4.2.17
+      - nist_sp800-53r5_CM-1
+      - nist_sp800-53r5_CM-2
+      - nist_sp800-53r5_CM-6
+      - nist_sp800-53r5_CM-7
+      - nist_sp800-53r5_IA-5
 
-# - name: "4.2.18 | PATCH | Ensure SSH MaxSessions is set to 10 or less"
-#   ansible.builtin.lineinfile:
-#       path: "{{ item.path }}"
-#       regexp: "^#MaxSessions|^MaxSessions"
-#       line: 'MaxSessions {{ amzn2023cis_ssh_maxsessions }}'
-#       validate: sshd -t -f %s
-#   with_items:
-#       - "{{ sshd_d_conf_files.files }}"
-#       - "{{ main_sshd_cfg.stat }}"
-#   when:
-#       - amzn2023cis_rule_4_2_18
-#   tags:
-#       - level1-server
-#       - patch
-#       - ssh
-#       - rule_4.2.18
-#       - nist_sp800-53r5_CM-1
-#       - nist_sp800-53r5_CM-2
-#       - nist_sp800-53r5_CM-6
-#       - nist_sp800-53r5_CM-7
-#       - nist_sp800-53r5_IA-5
+- name: "4.2.18 | PATCH | Ensure SSH MaxSessions is set to 10 or less"
+  ansible.builtin.lineinfile:
+      path: "{{ item.path }}"
+      regexp: "^#MaxSessions|^MaxSessions"
+      line: 'MaxSessions {{ amzn2023cis_ssh_maxsessions }}'
+      validate: sshd -t -f %s
+  with_items:
+      - "{{ sshd_d_conf_files.files }}"
+      - "{{ main_sshd_cfg.stat }}"
+  when:
+      - amzn2023cis_rule_4_2_18
+  tags:
+      - level1-server
+      - patch
+      - ssh
+      - rule_4.2.18
+      - nist_sp800-53r5_CM-1
+      - nist_sp800-53r5_CM-2
+      - nist_sp800-53r5_CM-6
+      - nist_sp800-53r5_CM-7
+      - nist_sp800-53r5_IA-5
 
 - name: "4.2.19 | PATCH | Ensure SSH LoginGraceTime is set to one minute or less"
   ansible.builtin.lineinfile:
