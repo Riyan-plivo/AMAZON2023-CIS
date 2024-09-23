@@ -216,17 +216,17 @@
       - sudo
       - patch
 
-- name: "PRELIM | 4.4.x | Install authselect"
-  ansible.builtin.package:
-      name: authselect
-      state: present
-  become: true
-  when:
-      - '"authselect" not in ansible_facts.packages'
-      - amzn2023cis_rule_4_4_1
-      - amzn2023cis_rule_4_4_2
-  tags:
-      - always
+# - name: "PRELIM | 4.4.x | Install authselect"
+#   ansible.builtin.package:
+#       name: authselect
+#       state: present
+#   become: true
+#   when:
+#       - '"authselect" not in ansible_facts.packages'
+#       - amzn2023cis_rule_4_4_1
+#       - amzn2023cis_rule_4_4_2
+#   tags:
+#       - always
 
 - name: "PRELIM | Section 5.2 | Configure System Accounting (auditd)"
   ansible.builtin.package:
