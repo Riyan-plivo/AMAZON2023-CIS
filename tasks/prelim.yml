@@ -30,14 +30,14 @@
     - always
 
 # Python script execution using Python 3
-- name: "PRELIM | Gather facts of all mounts using Python 3"
-  script: facts/all_mounts.py
-  args:
-    executable: python3
-    remote_src: true
-  changed_when: false
-  check_mode: false
-  register: all_mounts
+# - name: "PRELIM | Gather facts of all mounts using Python 3"
+#   script: facts/all_mounts.py
+#   args:
+#     executable: python3
+#     remote_src: true
+#   changed_when: false
+#   check_mode: false
+#   register: all_mounts
 
 # Section to gather interactive users (audit-related tasks)
 - name: "PRELIM | AUDIT | Interactive Users"
