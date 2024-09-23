@@ -1,8 +1,4 @@
 ---
-
-# Preliminary tasks that should always be run
-# List users in order to look files inside each home directory
----
 # Preliminary tasks for Amazon Linux 2023
 
 # Install Python 3 and ensure dnf module is used
