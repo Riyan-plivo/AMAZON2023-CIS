@@ -69,37 +69,37 @@
       - level1-server
       - users
 
-- name: "PRELIM | Setup crypto-policy"
-  block:
-    - name: "PRELIM | Install crypto-policies | pkgs present"
-      ansible.builtin.package:
-        name:
-          - crypto-policies
-          - crypto-policies-scripts
-        state: present
+# - name: "PRELIM | Setup crypto-policy"
+#   block:
+#     - name: "PRELIM | Install crypto-policies | pkgs present"
+#       ansible.builtin.package:
+#         name:
+#           - crypto-policies
+#           - crypto-policies-scripts
+#         state: present
 
-    - name: "PRELIM | Gather system-wide crypto-policy"
-      ansible.builtin.shell: 'update-crypto-policies --show'
-      changed_when: false
-      check_mode: false
-      register: amzn2023cis_system_wide_crypto_policy
+#     - name: "PRELIM | Gather system-wide crypto-policy"
+#       ansible.builtin.shell: 'update-crypto-policies --show'
+#       changed_when: false
+#       check_mode: false
+#       register: amzn2023cis_system_wide_crypto_policy
 
-    - name: "PRELIM | Gather system-wide crypto-policy | set fact system policy"
-      ansible.builtin.set_fact:
-        current_crypto_policy: "{{ amzn2023cis_system_wide_crypto_policy.stdout.split(':')[0] }}"
+#     - name: "PRELIM | Gather system-wide crypto-policy | set fact system policy"
+#       ansible.builtin.set_fact:
+#         current_crypto_policy: "{{ amzn2023cis_system_wide_crypto_policy.stdout.split(':')[0] }}"
 
-    - name: "PRELIM | Gather system-wide crypto-policy module | set fact system policy submodule"
-      ansible.builtin.set_fact:
-        current_crypto_module: "{{ amzn2023cis_system_wide_crypto_policy.stdout.split(':')[1] }}"
-      when: "':' in amzn2023cis_system_wide_crypto_policy.stdout"
+#     - name: "PRELIM | Gather system-wide crypto-policy module | set fact system policy submodule"
+#       ansible.builtin.set_fact:
+#         current_crypto_module: "{{ amzn2023cis_system_wide_crypto_policy.stdout.split(':')[1] }}"
+#       when: "':' in amzn2023cis_system_wide_crypto_policy.stdout"
   
-  when:
-    - amzn2023cis_rule_1_9
+#   when:
+#     - amzn2023cis_rule_1_9
 
-  tags:
-    - level1-server
-    - rule_1.9
-    - crypt
+#   tags:
+#     - level1-server
+#     - rule_1.9
+#     - crypt
 
 - name: "PRELIM | if systemd coredump"
   ansible.builtin.stat:
