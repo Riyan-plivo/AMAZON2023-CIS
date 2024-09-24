@@ -23,21 +23,21 @@
 #     - '"python3-libselinux" not in ansible_facts.packages'
 
 # Set the Python interpreter to Python 3
-- name: "PRELIM | Set Python 3 as the interpreter"
-  ansible.builtin.set_fact:
-    ansible_python_interpreter: /usr/bin/python3
-  tags:
-    - always
+# - name: "PRELIM | Set Python 3 as the interpreter"
+#   ansible.builtin.set_fact:
+#     ansible_python_interpreter: /usr/bin/python3
+#   tags:
+#     - always
 
 # Python script execution using Python 3
-- name: "PRELIM | Gather facts of all mounts using Python 3"
-  script: facts/all_mounts.py
-  args:
-    executable: python3
-    remote_src: true
-  changed_when: false
-  check_mode: false
-  register: all_mounts
+# - name: "PRELIM | Gather facts of all mounts using Python 3"
+#   script: facts/all_mounts.py
+#   args:
+#     executable: python3
+#     remote_src: true
+#   changed_when: false
+#   check_mode: false
+#   register: all_mounts
 
 # Section to gather interactive users (audit-related tasks)
 - name: "PRELIM | AUDIT | Interactive Users"
