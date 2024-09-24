@@ -29,7 +29,7 @@
   tags:
     - always
 
-Python script execution using Python 3
+# Python script execution using Python 3
 - name: "PRELIM | Gather facts of all mounts using Python 3"
   script: facts/all_mounts.py
   args:
