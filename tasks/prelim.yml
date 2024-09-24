@@ -14,13 +14,13 @@
   become: yes
 
 # Ensure python3-libselinux is installed for compatibility
-- name: "PRELIM | Ensure python3-libselinux is installed"
-  ansible.builtin.dnf:
-    name: python3-libselinux
-    state: present
-  become: yes
-  when:
-    - '"python3-libselinux" not in ansible_facts.packages'
+# - name: "PRELIM | Ensure python3-libselinux is installed"
+#   ansible.builtin.dnf:
+#     name: python3-libselinux
+#     state: present
+#   become: yes
+#   when:
+#     - '"python3-libselinux" not in ansible_facts.packages'
 
 # Set the Python interpreter to Python 3
 - name: "PRELIM | Set Python 3 as the interpreter"
