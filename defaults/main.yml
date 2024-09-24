@@ -66,7 +66,7 @@ amzn2023cis_legacy_boot: false
 ## Python Binary
 ## This is used for python3 Installations where python2 OS modules
 ## are used in ansible
-python2_bin: /bin/python3
+python3_bin: /usr/bin/python3
 
 ## Benchmark name and profile used by audting control role
 # The audit variable can be found at the base
