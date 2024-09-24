@@ -1,7 +1,7 @@
 ---
 
 - name: "1.6.1.1 | PATCH | Ensure SELinux is installed"
-  ansible.builtin.package:
+  ansible.builtin.dnf:
       name: libselinux
       state: present
   when:
@@ -113,7 +113,7 @@
       - nist_sp800-53r5_MP-2
 
 - name: "1.6.1.7 | PATCH | Ensure SETroubleshoot is not installed"
-  ansible.builtin.package:
+  ansible.builtin.dnf:
       name: setroubleshoot
       state: absent
   when:
@@ -128,7 +128,7 @@
       - nist_sp800-53r5_MP-2
 
 # - name: "1.6.1.8 | PATCH | Ensure the MCS Translation Service (mcstrans) is not installed"
-#   ansible.builtin.package:
+#   ansible.builtin.dnf:
 #       name: mcstrans
 #       state: absent
 #   when:
