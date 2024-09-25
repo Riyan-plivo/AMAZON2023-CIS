@@ -1,26 +1,26 @@
 ---
 
-- name: "3.4.2.1 | PATCH | Ensure firewalld default zone is set"
-  block:
-      - name: "3.4.2.1 | AUDIT | Ensure firewalld default zone is set"
-        ansible.builtin.shell: "firewall-cmd --get-default-zone | grep {{ amzn2023cis_default_zone }}"
-        changed_when: false
-        failed_when: ( firewalld_zone_set.rc not in [ 0, 1 ] )
-        register: firewalld_zone_set
+# - name: "3.4.2.1 | PATCH | Ensure firewalld default zone is set"
+#   block:
+#       - name: "3.4.2.1 | AUDIT | Ensure firewalld default zone is set"
+#         ansible.builtin.shell: "firewall-cmd --get-default-zone | grep {{ amzn2023cis_default_zone }}"
+#         changed_when: false
+#         failed_when: ( firewalld_zone_set.rc not in [ 0, 1 ] )
+#         register: firewalld_zone_set
 
-      - name: "3.4.2.1 | AUDIT | Ensure firewalld default zone is set"
-        ansible.builtin.command: firewall-cmd --set-default-zone="{{ amzn2023cis_default_zone }}"
-        when: firewalld_zone_set.rc != 0
-  when:
-      - amzn2023cis_firewall == "firewalld"
-      - amzn2023cis_rule_3_4_2_1
-  tags:
-      - level2-server
-      - patch
-      - firewalld
-      - rule_3.4.2.1
-      - nist_sp800-53r5_CA-9
-      - nist_sp800-53r5_SC-7
+#       - name: "3.4.2.1 | AUDIT | Ensure firewalld default zone is set"
+#         ansible.builtin.command: firewall-cmd --set-default-zone="{{ amzn2023cis_default_zone }}"
+#         when: firewalld_zone_set.rc != 0
+#   when:
+#       - amzn2023cis_firewall == "firewalld"
+#       - amzn2023cis_rule_3_4_2_1
+#   tags:
+#       - level2-server
+#       - patch
+#       - firewalld
+#       - rule_3.4.2.1
+#       - nist_sp800-53r5_CA-9
+#       - nist_sp800-53r5_SC-7
 
 - name: "3.4.2.2 | AUDIT | Ensure at least one nftables table exists"
   block:
