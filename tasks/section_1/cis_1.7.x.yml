@@ -33,23 +33,23 @@
       - nist_sp800-53r5_CM-3
       - nist_sp800-53r5_CM-6
 
-# - name: "1.7.3 | PATCH | Ensure remote login warning banner is configured properly"
-#   ansible.builtin.template:
-#       src: etc/issue.net.j2
-#       dest: /etc/issue.net
-#       owner: root
-#       group: root
-#       mode: '0644'
-#   when:
-#       - amzn2023cis_rule_1_7_3
-#   tags:
-#       - level1-server
-#       - banner
-#       - patch
-#       - rule_1.7.3
-#       - nist_sp800-53r5_CM-1
-#       - nist_sp800-53r5_CM-3
-#       - nist_sp800-53r5_CM-6
+- name: "1.7.3 | PATCH | Ensure remote login warning banner is configured properly"
+  ansible.builtin.template:
+      src: etc/issue.net.j2
+      dest: /etc/issue.net
+      owner: root
+      group: root
+      mode: '0644'
+  when:
+      - amzn2023cis_rule_1_7_3
+  tags:
+      - level1-server
+      - banner
+      - patch
+      - rule_1.7.3
+      - nist_sp800-53r5_CM-1
+      - nist_sp800-53r5_CM-3
+      - nist_sp800-53r5_CM-6
 
 # - name: "1.7.4 | PATCH | Ensure permissions on /etc/motd are configured"
 #   ansible.builtin.file:
