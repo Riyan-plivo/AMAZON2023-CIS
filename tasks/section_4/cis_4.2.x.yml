@@ -76,8 +76,8 @@
 #       - nist_sp800-53r5_AC-3
 #       - nist_sp800-53r5_MP-2
 
-- name: "4.2.4 | PATCH | Ensure SSH access is limited"
-  block:
+# 11- name: "4.2.4 | PATCH | Ensure SSH access is limited"
+#   block:
       # - name: "4.2.4 | PATCH | Ensure SSH access is limited | Add line to sshd_config for allowusers"
       #   ansible.builtin.lineinfile:
       #       path: "{{ amzn2023cis_sshd_config_file }}"
@@ -87,14 +87,14 @@
       #   notify: Restart sshd
       #   when: "amzn2023cis_sshd['allowusers']|default('') | length > 0"
 
-      - name: "4.2.4 | PATCH | Ensure SSH access is limited | Add line to sshd_config for allowgroups"
-        ansible.builtin.lineinfile:
-            regexp: "^AllowGroups"
-            line: "AllowGroups ec2-user wheel"
-            dest: "/etc/ssh/sshd_config"
-            validate: sshd -t -f %s
-        notify: Restart sshd
-        when: "amzn2023cis_sshd['allowgroups']|default('') | length > 0"
+      # 11 - name: "4.2.4 | PATCH | Ensure SSH access is limited | Add line to sshd_config for allowgroups"
+      #   ansible.builtin.lineinfile:
+      #       regexp: "^AllowGroups"
+      #       line: "AllowGroups ec2-user wheel"
+      #       dest: "/etc/ssh/sshd_config"
+      #       validate: sshd -t -f %s
+      #   notify: Restart sshd
+      #   when: "amzn2023cis_sshd['allowgroups']|default('') | length > 0"
 
       # - name: "4.2.4 | PATCH | Ensure SSH access is limited | Add line to sshd_config for denyusers"
       #   ansible.builtin.lineinfile:
@@ -113,15 +113,15 @@
       #       validate: sshd -t -f %s
       #   notify: Restart sshd
       #   when: "amzn2023cis_sshd['denygroups']|default('') | length > 0"
-  when:
-      - amzn2023cis_rule_4_2_4
-  tags:
-      - level1-server
-      - patch
-      - ssh
-      - rule_4.2.4
-      - nist_sp800-53r5_AC-3
-      - nist_sp800-53r5_MP-2
+  # 11 when:
+  #     - amzn2023cis_rule_4_2_4
+  # tags:
+  #     - level1-server
+  #     - patch
+  #     - ssh
+  #     - rule_4.2.4
+  #     - nist_sp800-53r5_AC-3
+  #     - nist_sp800-53r5_MP-2
 
 - name: "4.2.5 | PATCH | Ensure SSH LogLevel is appropriate"
   ansible.builtin.lineinfile:
@@ -165,20 +165,20 @@
 #       - nist_sp800-53r5_CM-7
 #       - nist_sp800-53r5_IA-5
 
-- name: "4.2.7 | PATCH | Ensure SSH root login is disabled"
-  ansible.builtin.lineinfile:
-      regexp: "^(#)?PermitRootLogin"
-      line: 'PermitRootLogin no'
-      dest: "/etc/ssh/sshd_config"
-      validate: sshd -t -f %s
-  when:
-      - amzn2023cis_rule_4_2_7
-  tags:
-      - level1-server
-      - patch
-      - ssh
-      - rule_4.2.7
-      - nist_sp800-53r5_AC-6
+# 11 - name: "4.2.7 | PATCH | Ensure SSH root login is disabled"
+#   ansible.builtin.lineinfile:
+#       regexp: "^(#)?PermitRootLogin"
+#       line: 'PermitRootLogin no'
+#       dest: "/etc/ssh/sshd_config"
+#       validate: sshd -t -f %s
+#   when:
+#       - amzn2023cis_rule_4_2_7
+#   tags:
+#       - level1-server
+#       - patch
+#       - ssh
+#       - rule_4.2.7
+#       - nist_sp800-53r5_AC-6
 
 - name: "4.2.8 | PATCH | Ensure SSH HostbasedAuthentication is disabled"
   ansible.builtin.lineinfile:
