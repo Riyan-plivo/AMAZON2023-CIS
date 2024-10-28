@@ -296,51 +296,51 @@
       - nist_sp800-53r5_CM-7
       - nist_sp800-53r5_IA-5
 
-- name: "6.2.10 | PATCH | Ensure local interactive user home directories exist"
-  block:
-      - name: "6.2.10 | PATCH | Ensure local interactive user home directories exist | Create dir if absent"
-        ansible.builtin.file:
-            path: "{{ item.dir }}"
-            state: directory
-            owner: "{{ item.id }}"
-            group: "{{ item.gid }}"
-        register: amzn2023cis_6_2_10_home_dir
-        loop: "{{ amzn2023cis_passwd  | selectattr('uid', '>=', min_int_uid | int ) | selectattr('uid', '<=', max_int_uid | int ) | list }}"
-        loop_control:
-            label: "{{ item.id }}"
+# - name: "6.2.10 | PATCH | Ensure local interactive user home directories exist"
+#   block:
+#       - name: "6.2.10 | PATCH | Ensure local interactive user home directories exist | Create dir if absent"
+#         ansible.builtin.file:
+#             path: "{{ item.dir }}"
+#             state: directory
+#             owner: "{{ item.id }}"
+#             group: "{{ item.gid }}"
+#         register: amzn2023cis_6_2_10_home_dir
+#         loop: "{{ amzn2023cis_passwd  | selectattr('uid', '>=', min_int_uid | int ) | selectattr('uid', '<=', max_int_uid | int ) | list }}"
+#         loop_control:
+#             label: "{{ item.id }}"
 
-      # set default ACLs so the homedir has an effective umask of 0027
-      - name: "6.2.10 | PATCH | Ensure local interactive user home directories exist | Set group ACL"
-        ansible.posix.acl:
-            path: "{{ item }}"
-            default: true
-            etype: group
-            permissions: rx
-            state: present
-        loop: "{{ discovered_interactive_users_home.stdout_lines }}"
-        when: not system_is_container
+#       # set default ACLs so the homedir has an effective umask of 0027
+#       - name: "6.2.10 | PATCH | Ensure local interactive user home directories exist | Set group ACL"
+#         ansible.posix.acl:
+#             path: "{{ item }}"
+#             default: true
+#             etype: group
+#             permissions: rx
+#             state: present
+#         loop: "{{ discovered_interactive_users_home.stdout_lines }}"
+#         when: not system_is_container
 
-      - name: "6.2.10 | PATCH | Ensure local interactive user home directories exist | Set other ACL"
-        ansible.posix.acl:
-            path: "{{ item }}"
-            default: true
-            etype: other
-            permissions: 0
-            state: present
-        loop: "{{ discovered_interactive_users_home.stdout_lines }}"
-        when: not system_is_container
-  when:
-      - amzn2023cis_rule_6_2_10
-  tags:
-      - level1-server
-      - patch
-      - users
-      - rule_6.2.10
-      - nist_sp800-53r5_CM-1
-      - nist_sp800-53r5_CM-2
-      - nist_sp800-53r5_CM-6
-      - nist_sp800-53r5_CM-7
-      - nist_sp800-53r5_IA-5
+#       - name: "6.2.10 | PATCH | Ensure local interactive user home directories exist | Set other ACL"
+#         ansible.posix.acl:
+#             path: "{{ item }}"
+#             default: true
+#             etype: other
+#             permissions: 0
+#             state: present
+#         loop: "{{ discovered_interactive_users_home.stdout_lines }}"
+#         when: not system_is_container
+#   when:
+#       - amzn2023cis_rule_6_2_10
+#   tags:
+#       - level1-server
+#       - patch
+#       - users
+#       - rule_6.2.10
+#       - nist_sp800-53r5_CM-1
+#       - nist_sp800-53r5_CM-2
+#       - nist_sp800-53r5_CM-6
+#       - nist_sp800-53r5_CM-7
+#       - nist_sp800-53r5_IA-5
 
 - name: "6.2.11 | PATCH | Ensure local interactive user dot files access is configured"
   block:
